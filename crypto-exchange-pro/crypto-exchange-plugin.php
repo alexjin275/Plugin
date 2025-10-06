@@ -56,6 +56,7 @@ require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-notifications.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-shortcodes.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-ajax-handlers.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-user-actions.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-theme-manager.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-liquidity-providers.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-liquidity-aggregator.php';
 
@@ -84,6 +85,9 @@ function crypto_exchange_init() {
     
     // Initialize user actions
     new Crypto_Exchange_User_Actions();
+    
+    // Initialize theme manager
+    new Crypto_Exchange_Theme_Manager();
 }
 add_action('plugins_loaded', 'crypto_exchange_init');
 
