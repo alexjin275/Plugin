@@ -48,15 +48,24 @@ require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-matching-engine.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-blockchain-wallet.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-charting.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-advanced-security.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-coin-management.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-risk-management.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-payment-processing.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-advanced-kyc.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-notifications.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-shortcodes.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-ajax-handlers.php';
 
 // Initialize the plugin
 function crypto_exchange_init() {
     $crypto_exchange = new Crypto_Exchange();
     $crypto_exchange->init();
+    
+    // Initialize shortcodes
+    new Crypto_Exchange_Shortcodes();
+    
+    // Initialize AJAX handlers
+    new Crypto_Exchange_Ajax_Handlers();
 }
 add_action('plugins_loaded', 'crypto_exchange_init');
 
@@ -82,6 +91,9 @@ function crypto_exchange_activate() {
     
     $notifications = new Crypto_Exchange_Notifications();
     $notifications->create_notification_tables();
+    
+    $coin_management = new Crypto_Exchange_Coin_Management();
+    $coin_management->create_coins_table();
     
     // Set default options
     add_option('crypto_exchange_version', CRYPTO_EXCHANGE_VERSION);
@@ -154,6 +166,7 @@ function crypto_exchange_uninstall() {
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}crypto_kyc_applications");
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}crypto_notifications");
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}crypto_price_history");
+    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}crypto_coins");
     
     // Remove options
     delete_option('crypto_exchange_version');
@@ -269,6 +282,15 @@ function crypto_exchange_admin_menu() {
         'crypto-exchange-notifications',
         'crypto_exchange_notifications_page'
     );
+    
+    add_submenu_page(
+        'crypto-exchange-pro',
+        'Coin Management',
+        'Coin Management',
+        'manage_options',
+        'crypto-exchange-coins',
+        'crypto_exchange_coins_page'
+    );
 }
 
 // Admin page callbacks
@@ -350,6 +372,10 @@ function crypto_exchange_notifications_page() {
     echo '<p>Notifications dashboard content goes here.</p>';
     echo '</div>';
     echo '</div>';
+}
+
+function crypto_exchange_coins_page() {
+    include CRYPTO_EXCHANGE_PLUGIN_DIR . 'templates/admin-coin-management.php';
 }
 
 // Enqueue scripts and styles
