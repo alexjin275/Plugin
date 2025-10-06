@@ -37,6 +37,7 @@ require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-wallet.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-market-data.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-kyc.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-admin.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-admin-config.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-api.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-security.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-theme.php';
@@ -330,6 +331,15 @@ function crypto_exchange_admin_menu() {
         'crypto-exchange-liquidity',
         'crypto_exchange_liquidity_page'
     );
+    
+    add_submenu_page(
+        'crypto-exchange-pro',
+        'Configuration',
+        'Configuration',
+        'manage_options',
+        'crypto-exchange-config',
+        'crypto_exchange_config_page'
+    );
 }
 
 // Admin page callbacks
@@ -419,6 +429,10 @@ function crypto_exchange_coins_page() {
 
 function crypto_exchange_liquidity_page() {
     include CRYPTO_EXCHANGE_PLUGIN_DIR . 'templates/admin-liquidity-providers.php';
+}
+
+function crypto_exchange_config_page() {
+    include CRYPTO_EXCHANGE_PLUGIN_DIR . 'templates/admin-configuration.php';
 }
 
 // Enqueue scripts and styles

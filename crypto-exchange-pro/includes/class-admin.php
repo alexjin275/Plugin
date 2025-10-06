@@ -119,6 +119,10 @@ class Crypto_Exchange_Admin {
         <div class="wrap">
             <h1>Crypto Exchange Settings</h1>
             
+            <div class="notice notice-info">
+                <p><strong>Advanced Configuration Available:</strong> <a href="<?php echo admin_url('admin.php?page=crypto-exchange-config'); ?>" class="button button-primary">Open Advanced Configuration</a></p>
+            </div>
+            
             <form method="post" action="">
                 <?php wp_nonce_field('crypto_exchange_settings', 'crypto_exchange_nonce'); ?>
                 
