@@ -20,90 +20,7 @@ class Crypto_Exchange_Admin {
      * Dashboard page
      */
     public function dashboard_page() {
-        $stats = $this->get_dashboard_stats();
-        ?>
-        <div class="wrap">
-            <h1>Crypto Exchange Dashboard</h1>
-            
-            <div class="crypto-dashboard-stats">
-                <div class="stat-card">
-                    <h3>Total Users</h3>
-                    <div class="stat-number"><?php echo number_format($stats['total_users']); ?></div>
-                </div>
-                
-                <div class="stat-card">
-                    <h3>Active Users</h3>
-                    <div class="stat-number"><?php echo number_format($stats['active_users']); ?></div>
-                </div>
-                
-                <div class="stat-card">
-                    <h3>Total Volume (24h)</h3>
-                    <div class="stat-number">$<?php echo number_format($stats['volume_24h'], 2); ?></div>
-                </div>
-                
-                <div class="stat-card">
-                    <h3>Total Orders</h3>
-                    <div class="stat-number"><?php echo number_format($stats['total_orders']); ?></div>
-                </div>
-                
-                <div class="stat-card">
-                    <h3>Pending KYC</h3>
-                    <div class="stat-number"><?php echo number_format($stats['pending_kyc']); ?></div>
-                </div>
-                
-                <div class="stat-card">
-                    <h3>Total Wallets</h3>
-                    <div class="stat-number"><?php echo number_format($stats['total_wallets']); ?></div>
-                </div>
-            </div>
-            
-            <div class="crypto-dashboard-charts">
-                <div class="chart-container">
-                    <h3>Trading Volume (Last 7 Days)</h3>
-                    <canvas id="volume-chart"></canvas>
-                </div>
-                
-                <div class="chart-container">
-                    <h3>User Registrations (Last 30 Days)</h3>
-                    <canvas id="users-chart"></canvas>
-                </div>
-            </div>
-            
-            <div class="crypto-dashboard-recent">
-                <div class="recent-orders">
-                    <h3>Recent Orders</h3>
-                    <table class="wp-list-table widefat fixed striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>User</th>
-                                <th>Pair</th>
-                                <th>Type</th>
-                                <th>Amount</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($stats['recent_orders'] as $order): ?>
-                            <tr>
-                                <td><?php echo $order->id; ?></td>
-                                <td><?php echo get_userdata($order->user_id)->user_email; ?></td>
-                                <td><?php echo $order->pair; ?></td>
-                                <td><?php echo ucfirst($order->order_type); ?></td>
-                                <td><?php echo number_format($order->amount, 8); ?></td>
-                                <td>$<?php echo number_format($order->price, 2); ?></td>
-                                <td><?php echo ucfirst($order->status); ?></td>
-                                <td><?php echo date('M j, Y H:i', strtotime($order->created_at)); ?></td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <?php
+        include CRYPTO_EXCHANGE_PLUGIN_DIR . 'templates/admin-dashboard.php';
     }
     
     /**
@@ -118,6 +35,10 @@ class Crypto_Exchange_Admin {
         ?>
         <div class="wrap">
             <h1>Crypto Exchange Settings</h1>
+            
+            <div class="notice notice-info">
+                <p><strong>Advanced Configuration Available:</strong> <a href="<?php echo admin_url('admin.php?page=crypto-exchange-config'); ?>" class="button button-primary">Open Advanced Configuration</a></p>
+            </div>
             
             <form method="post" action="">
                 <?php wp_nonce_field('crypto_exchange_settings', 'crypto_exchange_nonce'); ?>

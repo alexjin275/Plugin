@@ -37,6 +37,18 @@ require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-wallet.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-market-data.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-kyc.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-admin.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-admin-config.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-wallet-providers.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-wallet-addresses.php';
+
+// Include wallet provider classes
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/wallet-providers/class-coinbase-wallet.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/wallet-providers/class-metamask-wallet.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/wallet-providers/class-trust-wallet.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/wallet-providers/class-phantom-wallet.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/wallet-providers/class-ledger-wallet.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-wallet-api.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-error-handler.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-api.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-security.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-theme.php';
@@ -88,6 +100,15 @@ function crypto_exchange_init() {
     
     // Initialize theme manager
     new Crypto_Exchange_Theme_Manager();
+    
+    // Initialize wallet providers
+    new Crypto_Exchange_Wallet_Providers();
+    
+    // Initialize wallet API
+    new Crypto_Exchange_Wallet_API();
+    
+    // Initialize error handler
+    new Crypto_Exchange_Error_Handler();
 }
 add_action('plugins_loaded', 'crypto_exchange_init');
 
@@ -119,6 +140,11 @@ function crypto_exchange_activate() {
     
     $liquidity_providers = new Crypto_Exchange_Liquidity_Providers();
     $liquidity_providers->create_liquidity_providers_table();
+    
+    $wallet_providers = new Crypto_Exchange_Wallet_Providers();
+    $wallet_providers->create_wallet_providers_table();
+    
+    $wallet_addresses = new Crypto_Exchange_Wallet_Addresses();
     
     // Set default options
     add_option('crypto_exchange_version', CRYPTO_EXCHANGE_VERSION);
@@ -330,6 +356,24 @@ function crypto_exchange_admin_menu() {
         'crypto-exchange-liquidity',
         'crypto_exchange_liquidity_page'
     );
+    
+    add_submenu_page(
+        'crypto-exchange-pro',
+        'Configuration',
+        'Configuration',
+        'manage_options',
+        'crypto-exchange-config',
+        'crypto_exchange_config_page'
+    );
+    
+    add_submenu_page(
+        'crypto-exchange-pro',
+        'Wallet Providers',
+        'Wallet Providers',
+        'manage_options',
+        'crypto-exchange-wallet-providers',
+        'crypto_exchange_wallet_providers_page'
+    );
 }
 
 // Admin page callbacks
@@ -419,6 +463,14 @@ function crypto_exchange_coins_page() {
 
 function crypto_exchange_liquidity_page() {
     include CRYPTO_EXCHANGE_PLUGIN_DIR . 'templates/admin-liquidity-providers.php';
+}
+
+function crypto_exchange_config_page() {
+    include CRYPTO_EXCHANGE_PLUGIN_DIR . 'templates/admin-configuration.php';
+}
+
+function crypto_exchange_wallet_providers_page() {
+    include CRYPTO_EXCHANGE_PLUGIN_DIR . 'templates/admin-wallet-providers.php';
 }
 
 // Enqueue scripts and styles
