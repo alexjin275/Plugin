@@ -55,6 +55,14 @@ require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-advanced-kyc.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-notifications.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-shortcodes.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-ajax-handlers.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-liquidity-providers.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-liquidity-aggregator.php';
+
+// Include exchange integrations
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/exchanges/class-binance.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/exchanges/class-coinbase.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/exchanges/class-kraken.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/exchanges/class-huobi.php';
 
 // Initialize the plugin
 function crypto_exchange_init() {
@@ -66,6 +74,12 @@ function crypto_exchange_init() {
     
     // Initialize AJAX handlers
     new Crypto_Exchange_Ajax_Handlers();
+    
+    // Initialize liquidity providers
+    new Crypto_Exchange_Liquidity_Providers();
+    
+    // Initialize liquidity aggregator
+    new Crypto_Exchange_Liquidity_Aggregator();
 }
 add_action('plugins_loaded', 'crypto_exchange_init');
 
@@ -94,6 +108,9 @@ function crypto_exchange_activate() {
     
     $coin_management = new Crypto_Exchange_Coin_Management();
     $coin_management->create_coins_table();
+    
+    $liquidity_providers = new Crypto_Exchange_Liquidity_Providers();
+    $liquidity_providers->create_liquidity_providers_table();
     
     // Set default options
     add_option('crypto_exchange_version', CRYPTO_EXCHANGE_VERSION);
@@ -167,6 +184,11 @@ function crypto_exchange_uninstall() {
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}crypto_notifications");
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}crypto_price_history");
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}crypto_coins");
+    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}crypto_liquidity_providers");
+    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}crypto_liquidity_orders");
+    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}crypto_liquidity_stats");
+    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}crypto_exchange_pairs");
+    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}crypto_exchange_balances");
     
     // Remove options
     delete_option('crypto_exchange_version');
@@ -291,6 +313,15 @@ function crypto_exchange_admin_menu() {
         'crypto-exchange-coins',
         'crypto_exchange_coins_page'
     );
+    
+    add_submenu_page(
+        'crypto-exchange-pro',
+        'Liquidity Providers',
+        'Liquidity Providers',
+        'manage_options',
+        'crypto-exchange-liquidity',
+        'crypto_exchange_liquidity_page'
+    );
 }
 
 // Admin page callbacks
@@ -376,6 +407,10 @@ function crypto_exchange_notifications_page() {
 
 function crypto_exchange_coins_page() {
     include CRYPTO_EXCHANGE_PLUGIN_DIR . 'templates/admin-coin-management.php';
+}
+
+function crypto_exchange_liquidity_page() {
+    include CRYPTO_EXCHANGE_PLUGIN_DIR . 'templates/admin-liquidity-providers.php';
 }
 
 // Enqueue scripts and styles
