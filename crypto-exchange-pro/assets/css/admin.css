@@ -1,0 +1,513 @@
+/* Crypto Exchange Pro - Admin Styles */
+
+/* Dashboard Stats */
+.crypto-dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    border-left: 4px solid #007bff;
+}
+
+.stat-card h3 {
+    color: #6c757d;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Charts */
+.crypto-dashboard-charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.chart-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.chart-container h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.chart-container canvas {
+    max-width: 100%;
+    height: 300px;
+}
+
+/* Recent Data */
+.crypto-dashboard-recent {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.recent-orders {
+    padding: 1.5rem;
+}
+
+.recent-orders h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+/* Trading Tabs */
+.crypto-trading-tabs .nav-tab-wrapper {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.crypto-trading-tabs .nav-tab {
+    background: #f1f1f1;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+    margin-right: 5px;
+    border-radius: 4px 4px 0 0;
+}
+
+.crypto-trading-tabs .nav-tab:hover {
+    background: #e1e1e1;
+}
+
+.crypto-trading-tabs .nav-tab-active {
+    background: white;
+    border-bottom: 1px solid white;
+    margin-bottom: -1px;
+}
+
+.crypto-trading-tabs .tab-content {
+    display: none;
+    padding: 1.5rem;
+    background: white;
+    border: 1px solid #ddd;
+    border-top: none;
+}
+
+.crypto-trading-tabs .tab-content.active {
+    display: block;
+}
+
+/* Status Badges */
+.kyc-status,
+.account-status,
+.transaction-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.kyc-status.kyc-pending,
+.transaction-status.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.kyc-status.kyc-verified,
+.transaction-status.completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.kyc-status.kyc-rejected,
+.transaction-status.failed {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.account-status.account-active {
+    background: #d4edda;
+    color: #155724;
+}
+
+.account-status.account-inactive {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* Wallet Stats */
+.crypto-wallet-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.wallet-stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    border-left: 4px solid #28a745;
+}
+
+.wallet-stat-card h3 {
+    color: #6c757d;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #6c757d;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+.stat-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+/* Form Styles */
+.crypto-exchange-settings .form-table th {
+    width: 200px;
+    padding: 20px 10px 20px 0;
+    vertical-align: top;
+}
+
+.crypto-exchange-settings .form-table td {
+    padding: 15px 10px;
+}
+
+.crypto-exchange-settings fieldset {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.crypto-exchange-settings fieldset label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.crypto-exchange-settings fieldset input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+/* Table Enhancements */
+.wp-list-table .column-id {
+    width: 60px;
+}
+
+.wp-list-table .column-email {
+    width: 200px;
+}
+
+.wp-list-table .column-kyc_status {
+    width: 100px;
+}
+
+.wp-list-table .column-account_status {
+    width: 100px;
+}
+
+.wp-list-table .column-trading_limits {
+    width: 120px;
+}
+
+.wp-list-table .column-last_login {
+    width: 150px;
+}
+
+.wp-list-table .column-actions {
+    width: 150px;
+}
+
+/* Action Buttons */
+.button-small {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    margin-right: 0.25rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .crypto-dashboard-stats {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    
+    .crypto-dashboard-charts {
+        grid-template-columns: 1fr;
+    }
+    
+    .crypto-wallet-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .crypto-trading-tabs .nav-tab-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .crypto-trading-tabs .nav-tab {
+        margin-bottom: 5px;
+    }
+}
+
+/* Loading States */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Notifications */
+.notice {
+    margin: 5px 0 15px;
+    padding: 1px 12px;
+    border-left: 4px solid #00a0d2;
+    background: #fff;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+
+.notice.notice-success {
+    border-left-color: #46b450;
+}
+
+.notice.notice-error {
+    border-left-color: #dc3232;
+}
+
+.notice.notice-warning {
+    border-left-color: #ffb900;
+}
+
+/* Custom Fields */
+.crypto-custom-field {
+    margin-bottom: 1rem;
+}
+
+.crypto-custom-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.crypto-custom-field input,
+.crypto-custom-field select,
+.crypto-custom-field textarea {
+    width: 100%;
+    max-width: 400px;
+}
+
+.crypto-custom-field .description {
+    color: #666;
+    font-style: italic;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Data Tables */
+.crypto-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.crypto-data-table th,
+.crypto-data-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.crypto-data-table th {
+    background: #f8f9fa;
+    font-weight: 500;
+    color: #333;
+}
+
+.crypto-data-table tr:hover {
+    background: #f8f9fa;
+}
+
+/* Pagination */
+.crypto-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 0.5rem;
+}
+
+.crypto-pagination a,
+.crypto-pagination span {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #333;
+    border-radius: 4px;
+}
+
+.crypto-pagination a:hover {
+    background: #f8f9fa;
+}
+
+.crypto-pagination .current {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Filters */
+.crypto-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.crypto-filters select,
+.crypto-filters input {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Export Buttons */
+.crypto-export-buttons {
+    margin-bottom: 1rem;
+}
+
+.crypto-export-buttons .button {
+    margin-right: 0.5rem;
+}
+
+/* Charts Container */
+.charts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Summary Cards */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.summary-card {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.summary-card .icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.summary-card .value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.25rem;
+}
+
+.summary-card .label {
+    color: #6c757d;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Color Coding */
+.positive {
+    color: #28a745;
+}
+
+.negative {
+    color: #dc3545;
+}
+
+.neutral {
+    color: #6c757d;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Print Styles */
+@media print {
+    .crypto-nav,
+    .crypto-sidebar,
+    .crypto-footer,
+    .button,
+    .crypto-export-buttons {
+        display: none !important;
+    }
+    
+    .crypto-exchange-container {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .crypto-dashboard-stats,
+    .crypto-wallet-stats {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
