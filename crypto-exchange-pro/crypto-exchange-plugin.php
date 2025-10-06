@@ -55,6 +55,7 @@ require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-advanced-kyc.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-notifications.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-shortcodes.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-ajax-handlers.php';
+require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-user-actions.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-liquidity-providers.php';
 require_once CRYPTO_EXCHANGE_PLUGIN_DIR . 'includes/class-liquidity-aggregator.php';
 
@@ -80,6 +81,9 @@ function crypto_exchange_init() {
     
     // Initialize liquidity aggregator
     new Crypto_Exchange_Liquidity_Aggregator();
+    
+    // Initialize user actions
+    new Crypto_Exchange_User_Actions();
 }
 add_action('plugins_loaded', 'crypto_exchange_init');
 
